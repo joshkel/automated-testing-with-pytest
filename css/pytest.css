@@ -1,0 +1,36 @@
+ul.book-list {
+    list-style-type: none;
+}
+
+ul.book-list > li {
+    position: relative;
+    /* These sizes are chosen to match the width of book images */
+    margin-left: 220px;
+    margin-right: 220px;
+    height: 150px;
+}
+
+ul.book-list > li > a {
+    display: inline-block;
+}
+
+ul.book-list > li > a > img {
+    border: none;
+    position: absolute;
+    max-width: inherit;
+    max-height: inherit;
+}
+
+ul.book-list > li:nth-child(odd) > a > img {
+    left: -220px;
+}
+
+ul.book-list > li:nth-child(even) > a {
+    text-align: right;
+}
+
+ul.book-list > li:nth-child(even) > a > img {
+    left: calc(100% + 20px);
+    transform: translateY(-50%);
+}
+
