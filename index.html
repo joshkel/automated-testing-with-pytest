@@ -7,7 +7,7 @@
 		<title>Making Pytest Your Batman</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/moon.css">
+		<link rel="stylesheet" href="css/theme/solarized.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -26,6 +26,62 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+                <section class="align-left">
+                    <a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"><img data-src="img/clean-code.jpg" class="float-right" width=188 height=249 alt="Clean Code"></a>
+
+                    <p>The Three Laws of TDD</p>
+
+                    <!-- Manual styling to allow flowing around title image -->
+                    <ol style="width: calc(100% - 250px)">
+                        <li>You may not write production code until you have written a failing unit test.</li>
+                        <li>You may not write more of a unit test than is sufficient to fail, and not compiling is failing.</li>
+                        <li>You may not write more production code than is sufficient to pass the currently failing test.</li>
+                    </ol>
+
+                    <p>&mdash; <a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882">Robert C. Martin, <i>Clean Code</i></a></p>
+                </section>
+
+                <section class="align-left">
+                    <a href="https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052"><img data-src="img/working-effectively-with-legacy-code.jpg" class="float-right" width=188 height=249></a>
+
+                    <p>Unit tests run fast. If they don't run fast, they aren't unit tests.</p>
+
+                    <p>Other kinds of tests often masquerade as unit tests. A test is not a unit test if:</p>
+
+                    <ol>
+                        <li> It talks to a database.</li>
+                        <li> It communicates across a network.</li>
+                        <li> It touches the file system.</li>
+                        <li> You have to do special things to your environment (such as editing configuration files) to run it.</li>
+                    </ol>
+
+                    <p>&mdash; <a href="https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052">Michael Feathers, <i>Working Effectively with Legacy Code</i></a></p>
+                </section>
+
+                <section data-transition="fade-out" class="align-left">
+                    <img src="img/dark-knight.jpg" class="float-left">
+                    <p>[I'm] lazy, as all good engineers are wont to be.  Being
+                    lazy means you don't want to find bugs at run time. Being
+                    lazy means you don't want to ever make the same mistake
+                    twice. Being lazy means making your compiler(s) work as
+                    hard as possible, so that you don't have to&hellip; If you
+                    treat it well, you can make the compiler your right-hand
+                    man, helper, conscience, your batman.</p>
+                    <p>&mdash; <a href="https://www.amazon.com/Imperfect-Practical-Solutions-Real-Life-Programming/dp/0321228774">Matthew Wilson, <i>Imperfect C++</i></a></p>
+                </section>
+
+                <section data-transition="fade-out" class="align-left">
+                    <img src="img/sam-gamgee.jpg" class="float-left">
+                    <p>[I'm] lazy, as all good engineers are wont to be.  Being
+                    lazy means you don't want to find bugs at run time. Being
+                    lazy means you don't want to ever make the same mistake
+                    twice. Being lazy means making your compiler(s) work as
+                    hard as possible, so that you don't have to&hellip; If you
+                    treat it well, you can make the compiler your right-hand
+                    man, helper, conscience, your batman.</p>
+                    <p>&mdash; <a href="https://www.amazon.com/Imperfect-Practical-Solutions-Real-Life-Programming/dp/0321228774">Matthew Wilson, <i>Imperfect C++</i></a></p>
+                </section>
+
                 <section>
                     <h3>Further Reading</h3>
 

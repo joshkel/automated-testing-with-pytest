@@ -1,3 +1,19 @@
+.align-left {
+    text-align: left;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.reveal section img.float-left {
+    margin-right: 10px;
+}
+
 ul.book-list {
     list-style-type: none;
 }

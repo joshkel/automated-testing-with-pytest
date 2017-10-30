@@ -1,3 +1,9 @@
+# Why Automated Testing?
+
+Matthew Wilson is a C++ developer, so he talks about making the compiler work for him, but the same concept applies to making the computer work for us in general.
+
+Wilson explains that a batman is a term from the British Empire, meaning an orderly or personal servant attached to an officer.  More Samwise Gamgee than Batman.
+
 # Further Reading
 
 Various perspectives on automated testing in general, unit testing in particular, and test-driven development.
