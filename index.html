@@ -26,10 +26,25 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+                <section>
+                    <h1>Automated Testing with Pytest</h1>
+                    <h3 class="fragment">or</h3>
+                    <h2 class="fragment">Making Pytest Your Batman</h2>
+                </section>
+
+                <section>
+                    <h2>What is Automated Testing?</h2>
+
+                    <h3 class="fragment">And what's the best way to do it?</h3>
+
+                    <aside class="notes">This gets controversial in a hurry.</aside>
+                </section>
+
                 <section class="align-left">
                     <a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"><img data-src="img/clean-code.jpg" class="float-right" width=188 height=249 alt="Clean Code"></a>
 
                     <p>The Three Laws of TDD</p>
+                    <p>(Test Driven Development)</p>
 
                     <!-- Manual styling to allow flowing around title image -->
                     <ol style="width: calc(100% - 250px)">
@@ -39,6 +54,8 @@
                     </ol>
 
                     <p>&mdash; <a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882">Robert C. Martin, <i>Clean Code</i></a></p>
+
+                    <aside class="notes">Here's one view. <i>Clean Code</i> is one of the best programming books I've read, but I'm not certain I agree. And Uncle Bob can be pretty dogmatic&mdash; he compares TDD to doctors washing their hands and strongly implies it's unprofessional not to do it.</aside>
                 </section>
 
                 <section class="align-left">
@@ -49,13 +66,15 @@
                     <p>Other kinds of tests often masquerade as unit tests. A test is not a unit test if:</p>
 
                     <ol>
-                        <li> It talks to a database.</li>
-                        <li> It communicates across a network.</li>
-                        <li> It touches the file system.</li>
-                        <li> You have to do special things to your environment (such as editing configuration files) to run it.</li>
+                        <li>It talks to a database.</li>
+                        <li>It communicates across a network.</li>
+                        <li>It touches the file system.</li>
+                        <li>You have to do special things to your environment (such as editing configuration files) to run it.</li>
                     </ol>
 
                     <p>&mdash; <a href="https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052">Michael Feathers, <i>Working Effectively with Legacy Code</i></a></p>
+
+                    <aside class="notes"><i>Working Effectively with Legacy Code</i> is a <em>fantastic</em> resource on how to take old, hard-to-test code and modernize it, so Feathers certainly knows his stuff.  And there's a lot of truth to the argument that unit tests need to be so fast that you have no excuse not to run them. But I'd rather have a "fast enough" test that breaks these rules than jump through a lot of hoops trying to meet them.</aside>
                 </section>
 
                 <section data-transition="fade-out" class="align-left">
@@ -68,6 +87,8 @@
                     treat it well, you can make the compiler your right-hand
                     man, helper, conscience, your batman.</p>
                     <p>&mdash; <a href="https://www.amazon.com/Imperfect-Practical-Solutions-Real-Life-Programming/dp/0321228774">Matthew Wilson, <i>Imperfect C++</i></a></p>
+
+                    <aside class="notes">Wilson's a C++ developer, so he talks about &ldquo;compilers,&rdquo; but you can substitute &ldquo;computers&rdquo; in general here. This is closer to my view. As programmers, we automate things for a living &mdash; this extends to automating our own work.</aside>
                 </section>
 
                 <section data-transition="fade-out" class="align-left">
@@ -80,6 +101,8 @@
                     treat it well, you can make the compiler your right-hand
                     man, helper, conscience, your batman.</p>
                     <p>&mdash; <a href="https://www.amazon.com/Imperfect-Practical-Solutions-Real-Life-Programming/dp/0321228774">Matthew Wilson, <i>Imperfect C++</i></a></p>
+
+                    <aside class="notes">&ldquo;Batman&rdquo; is a term from the days of the British Empire, referring to a servant or orderly attached to a military officer.</aside>
                 </section>
 
                 <section>
