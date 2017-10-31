@@ -29,13 +29,59 @@
                 <section>
                     <h1>Automated Testing with Pytest</h1>
                     <h3 class="fragment">or</h3>
-                    <h2 class="fragment">Making Pytest Your Batman</h2>
+                    <h2 class="fragment">Making Pytest Your Batman 🦇</h2>
                 </section>
 
                 <section>
                     <h2>What is Automated Testing?</h2>
+                </section>
 
-                    <h3 class="fragment">And what's the best way to do it?</h3>
+                <section>
+                    <h3>Write Some Code</h3>
+
+                    <p>Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34&hellip;</p>
+
+                    <pre><code data-trim>
+                    def fib(n):
+                        if n == 0:
+                            return 0
+                        elif n == 1:
+                            return 1
+                        else:
+                            return fib(n - 1) + fib(n - 2)
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Test It Out</h3>
+
+                    <pre><code data-trim>
+In [1]: from fib import fib
+
+In [2]: fib(1)
+Out[2]: 1
+
+In [3]: fib(3)
+Out[3]: 2
+
+In [4]: fib(4)
+Out[4]: 3
+
+In [5]: fib(5)
+Out[5]: 5
+
+In [6]: assert fib(2) == 1
+
+In [7]: assert fib(5) == 5
+
+In [8]: assert fib(6) == 8
+
+In [9]: %save test_fib.py 1 6-8
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>What's the Best Way to Do Automated Testing?</h2>
 
                     <aside class="notes">This gets controversial in a hurry.</aside>
                 </section>
@@ -103,6 +149,172 @@
                     <p>&mdash; <a href="https://www.amazon.com/Imperfect-Practical-Solutions-Real-Life-Programming/dp/0321228774">Matthew Wilson, <i>Imperfect C++</i></a></p>
 
                     <aside class="notes">&ldquo;Batman&rdquo; is a term from the days of the British Empire, referring to a servant or orderly attached to a military officer.</aside>
+                </section>
+
+                <section>
+                    <h3>Faster Feedback</h3>
+
+                    <ul>
+                        <li class="fragment">Interactive computing</li>
+                        <li class="fragment">Syntax highlighting</li>
+                        <li class="fragment">IDE code analysis</li>
+                        <li class="fragment">On-site customers</li>
+                        <li class="fragment">Continuous integration</li>
+                        <li class="fragment">Continuous deployment</li>
+                        <li class="fragment">Automated testing</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Terminology</h3>
+
+                    <dl>
+                        <dt class="fragment" data-fragment-index=1>Test-driven development</dt>
+                        <dd class="fragment" data-fragment-index=1>Writing tests before you write the code</dd>
+
+                        <dt class="fragment" data-fragment-index=2>Unit testing</dt>
+                        <dd class="fragment" data-fragment-index=2>Testing a single function, class, or method</dd>
+
+                        <dt class="fragment" data-fragment-index=3>Integration testing or component testing</dt>
+                        <dd class="fragment" data-fragment-index=3>Testing a group of related units together</dd>
+
+                        <dt class="fragment" data-fragment-index=4>System testing or end-to-end testing</dt>
+                        <dd class="fragment" data-fragment-index=4>Tests that are run against the entire system</dd>
+
+                        <dt class="fragment" data-fragment-index=5>Automated testing</dt>
+                        <dd class="fragment" data-fragment-index=5>The opposite of manual testing</dd>
+                    </dl>
+
+                    <aside class="notes">There are terminology differences here; e.g., Uncle Bob says integration tests are a higher level than component tests.</aside>
+                </section>
+
+                <section>
+                    <h3>unittest</h3>
+
+                    <pre><code data-trim>
+                    from fib import fib
+                    import unittest
+
+                    class FibTestCase(unittest.TestCase):
+                        def test_fib(self):
+                            self.assertEqual(fib(1), 1)
+                            self.assertEqual(fib(2), 1)
+                            self.assertEqual(fib(3), 2)
+                            self.assertEqual(fib(4), 3)
+                            self.assertEqual(fib(5), 5)
+
+                    if __name__ == '__main__':
+                        unittest.main()
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Switching to pytest</h3>
+
+                    <ol>
+                        <li class="fragment"><pre>pip install pytest</pre></li>
+                        <li class="fragment">Run <pre>pytest</pre> instead of <pre>./my_test_suite.py</pre></li>
+                        <li class="fragment">That's it!</li>
+                    </ol>
+
+                    <aside class="notes">pytest is drop-in-compatible with unittest, and it supports test discovery, so you don't need to do anything special to tell it what tests to run.</aside>
+                </section>
+
+                <section>
+                    <h3>Switching to pytest</h3>
+
+                    <pre><code data-trim>
+                    from fib import fib
+
+                    def test_fib():
+                        assert fib(1) == 1
+                        assert fib(2) == 1
+                        assert fib(3) == 2
+                        assert fib(4) == 3
+                        assert fib(5) == 5
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>pytest Benefits</h3>
+
+                    <ul>
+                        <li>Test discovery</li> <!-- TODO: unittest does this too - how well does it work? -->
+                        <li>No need to inherit from TestCase</li>
+                        <li>Simpler assertions</li>
+                        <li>Test fixtures</li>
+                        <li>Plugins</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>unittest Assertions</h3>
+
+                    <ul>
+                        <li>assertEqual</li>
+                        <li>assertNotEqual</li>
+                        <li>assertTrue</li>
+                        <li>assertFalse</li>
+                        <li>assertIs</li>
+                        <li>assertIsNot</li>
+                        <li>assertIsNone</li>
+                        <li>assertIsNotNone</li>
+                        <li>assertIn</li>
+                        <li>assertNotIn</li>
+                        <li>assertIsInstance</li>
+                        <li>assertIsNotInstance</li>
+                        <li>assertAlmostEqual</li>
+                        <li>assertNotAlmostEqual</li>
+                        <li>assertGreater</li>
+                        <li>assertGreaterEqual</li>
+                        <li>assertLess</li>
+                        <li>assertLessEqual</li>
+                        <li>assertRegex</li>
+                        <li>assertNotRegex</li>
+                        <li>&hellip;and more</li>  <!-- TODO: formatting -->
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>pytest Assertions</h3>
+
+                    <h3>assert</h3>
+                </section>
+
+                <section>
+                    <h3>pytest Assertions</h3>
+
+                    <!-- TODO: figure out how it rewrites it -->
+                </section>
+
+                <section>
+                    <h3>pytest Assertions</h3>
+                    <!-- TODO: expected exceptions -->
+                </section>
+
+                <section>
+                    <h3>pytest Fixtures</h3>
+                    <!-- TODO: populate this -->
+                </section>
+
+                <section>
+                    <h3>pytest Plugins</h3>
+                    <!-- TODO: watch, django, coverage -->
+                </section>
+
+                <section>
+                    <h3>pytest Coverage</h3>
+
+                    <pre><code data-trim>
+                    pip install pytest-cov
+                    pytest --cov=. --cov-report=html:../cov_html
+                    </code></pre>
+                    <!-- TODO: Screenshot of what this looks like -->
+                </section>
+
+                <section>
+                    <h3>Tips and Tricks</h3>
+                    <!-- TODO: pdb, including --pdb; running a test directly? -->
                 </section>
 
                 <section>
