@@ -154,6 +154,8 @@ In [9]: %save test_fib.py 1 6-8
                 <section>
                     <h3>Faster Feedback</h3>
 
+                    <p>All the ways we've improved our feedback&hellip;</p>
+
                     <ul>
                         <li class="fragment">Interactive computing</li>
                         <li class="fragment">Syntax highlighting</li>
@@ -212,12 +214,16 @@ In [9]: %save test_fib.py 1 6-8
                     <h3>Switching to pytest</h3>
 
                     <ol>
-                        <li class="fragment"><pre>pip install pytest</pre></li>
-                        <li class="fragment">Run <pre>pytest</pre> instead of <pre>./my_test_suite.py</pre></li>
+                        <li class="fragment"><code>pip install pytest</code></li>
+                        <li class="fragment">Run <code>pytest</code> instead of <code>./my_test_suite.py</code></li>
                         <li class="fragment">That's it!</li>
                     </ol>
 
-                    <aside class="notes">pytest is drop-in-compatible with unittest, and it supports test discovery, so you don't need to do anything special to tell it what tests to run.</aside>
+                    <aside class="notes">
+                        pytest is drop-in-compatible with unittest, and it
+                        supports test discovery, so you don't need to do
+                        anything special to tell it what tests to run.
+                    </aside>
                 </section>
 
                 <section>
@@ -239,57 +245,93 @@ In [9]: %save test_fib.py 1 6-8
                     <h3>pytest Benefits</h3>
 
                     <ul>
-                        <li>Test discovery</li> <!-- TODO: unittest does this too - how well does it work? -->
+                        <li>Test discovery</li>
                         <li>No need to inherit from TestCase</li>
                         <li>Simpler assertions</li>
                         <li>Test fixtures</li>
                         <li>Plugins</li>
                     </ul>
+
+                    <aside class="notes">
+                        Actually, current versions of unittest do discovery too, although I've had better luck with pytest's.
+                    </aside>
                 </section>
 
                 <section>
                     <h3>unittest Assertions</h3>
 
-                    <ul>
-                        <li>assertEqual</li>
-                        <li>assertNotEqual</li>
-                        <li>assertTrue</li>
-                        <li>assertFalse</li>
-                        <li>assertIs</li>
-                        <li>assertIsNot</li>
-                        <li>assertIsNone</li>
-                        <li>assertIsNotNone</li>
-                        <li>assertIn</li>
-                        <li>assertNotIn</li>
-                        <li>assertIsInstance</li>
-                        <li>assertIsNotInstance</li>
-                        <li>assertAlmostEqual</li>
-                        <li>assertNotAlmostEqual</li>
-                        <li>assertGreater</li>
-                        <li>assertGreaterEqual</li>
-                        <li>assertLess</li>
-                        <li>assertLessEqual</li>
-                        <li>assertRegex</li>
-                        <li>assertNotRegex</li>
-                        <li>&hellip;and more</li>  <!-- TODO: formatting -->
-                    </ul>
+                    <pre><code data-trim class="markdown two-column">
+                        assertEqual
+                        assertNotEqual
+                        assertTrue
+                        assertFalse
+                        assertIs
+                        assertIsNot
+                        assertIsNone
+                        assertIsNotNone
+                        assertIn
+                        assertNotIn
+                    </code></pre>
+                    <pre><code data-trim class="markdown two-column">
+                        assertIsInstance
+                        assertIsNotInstance
+                        assertAlmostEqual
+                        assertNotAlmostEqual
+                        assertGreater
+                        assertGreaterEqual
+                        assertLess
+                        assertLessEqual
+                        assertRegex
+                        assertNotRegex
+                    </code></pre>
                 </section>
 
                 <section>
                     <h3>pytest Assertions</h3>
 
-                    <h3>assert</h3>
+                    <pre><code data-trim class="markdown">
+                        assert
+                    </code></pre>
                 </section>
 
                 <section>
                     <h3>pytest Assertions</h3>
 
-                    <!-- TODO: figure out how it rewrites it -->
+                    <p>pytest inspects the Abstract Syntax Tree (AST) to turn this&hellip;</p>
+
+                    <pre><code data-trim>
+                    a = 1
+                    b = 2
+                    assert a + b == 3
+                    </code></pre>
                 </section>
 
                 <section>
                     <h3>pytest Assertions</h3>
-                    <!-- TODO: expected exceptions -->
+
+                    <p>&hellip;into this.</p>
+
+                    <pre><code data-trim>
+                    @py_assert0 = 1
+                    @py_assert2 = 2
+                    @py_assert4 = @py_assert0 + @py_assert2
+                    @py_assert6 = 3
+                    @py_assert5 = @py_assert4 == @py_assert6
+                    if not @py_assert5:
+                        @py_format8 = @pytest_ar._call_reprcompare(('==',), \
+                            (@py_assert5,), ('(%(py1)s + %(py3)s) == %(py7)s',), \
+                            (@py_assert4, @py_assert6)) % {
+                                'py3': @pytest_ar._saferepr(@py_assert2),
+                                'py1': @pytest_ar._saferepr(@py_assert0),
+                                'py7': @pytest_ar._saferepr(@py_assert6)}
+                        @py_format10 = ('' + 'assert %(py9)s') % {'py9': @py_format8}
+                        raise AssertionError(@pytest_ar._format_explanation(@py_format10))
+                    @py_assert0 = @py_assert2 = @py_assert4 = @py_assert5 = @py_assert6 = None
+                    </code></pre>
+
+                    <p>(You are not expected to understand this.)</p>
+
+                    <aside class="notes">This is magical, and magic code is often bad &mdash; it's even part of the Zen of Python that &ldquo;explicit is better than implicit.&rdquo; But, sometimes, some magic can be nice; for unit testing in particular, it saves a lot of boilerplate.</aside>
                 </section>
 
                 <section>
@@ -299,7 +341,14 @@ In [9]: %save test_fib.py 1 6-8
 
                 <section>
                     <h3>pytest Plugins</h3>
-                    <!-- TODO: watch, django, coverage -->
+
+                    <a href="http://plugincompat.herokuapp.com/">plugincompat.herokuapp.com</a>
+                </section>
+
+                <section>
+                    <h3>pytest-watch</h3>
+
+                    <p>Run <code>ptw</code>, and your tests will be automatically executed whenever your code changes.</p>
                 </section>
 
                 <section>
@@ -309,12 +358,11 @@ In [9]: %save test_fib.py 1 6-8
                     pip install pytest-cov
                     pytest --cov=. --cov-report=html:../cov_html
                     </code></pre>
-                    <!-- TODO: Screenshot of what this looks like -->
                 </section>
 
                 <section>
                     <h3>Tips and Tricks</h3>
-                    <!-- TODO: pdb, including --pdb; running a test directly? -->
+                    <!-- TODO: pdb, including --pdb; filtering tests; expected exceptions; running a test directly? -->
                 </section>
 
                 <section>
@@ -356,6 +404,7 @@ In [9]: %save test_fib.py 1 6-8
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+                history: true,
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },

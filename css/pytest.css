@@ -10,6 +10,11 @@
     float: right;
 }
 
+.two-column {
+    float: left;
+    width: 45%;
+}
+
 .reveal section img.float-left {
     margin-right: 10px;
 }
