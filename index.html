@@ -75,8 +75,17 @@ In [6]: assert fib(2) == 1
 In [7]: assert fib(5) == 5
 
 In [8]: assert fib(6) == 8
+                    </code></pre>
+                </section>
 
-In [9]: %save test_fib.py 1 6-8
+                <section>
+                    <h3>Turn It into Something You Can Run</h3>
+
+                    <pre><code>In [9]: %save test_fib.py 1 6-8</code></pre>
+
+                    <pre><code data-trim>
+                    # I can now re-run these tests whenever I want!
+                    ./test_fib.py
                     </code></pre>
                 </section>
 
@@ -154,7 +163,7 @@ In [9]: %save test_fib.py 1 6-8
                 <section>
                     <h3>Faster Feedback</h3>
 
-                    <p>All the ways we've improved our feedback&hellip;</p>
+                    <p>All the ways our industry has improved our feedback&hellip;</p>
 
                     <ul>
                         <li class="fragment">Interactive computing</li>
@@ -163,8 +172,9 @@ In [9]: %save test_fib.py 1 6-8
                         <li class="fragment">On-site customers</li>
                         <li class="fragment">Continuous integration</li>
                         <li class="fragment">Continuous deployment</li>
-                        <li class="fragment">Automated testing</li>
                     </ul>
+
+                    <p class="fragment">And automated testing</p>
                 </section>
 
                 <section>
@@ -219,6 +229,8 @@ In [9]: %save test_fib.py 1 6-8
                         <li class="fragment">That's it!</li>
                     </ol>
 
+                    <p class="fragment">(or use <a href="https://pypi.python.org/pypi/unittest2pytest/">unittest2pytest</a>)</p>
+
                     <aside class="notes">
                         pytest is drop-in-compatible with unittest, and it
                         supports test discovery, so you don't need to do
@@ -245,15 +257,16 @@ In [9]: %save test_fib.py 1 6-8
                     <h3>pytest Benefits</h3>
 
                     <ul>
-                        <li>Test discovery</li>
+                        <li>Test discovery (any <code>*_test.py</code> or <code>test_*.py</code>)</li>
                         <li>No need to inherit from TestCase</li>
                         <li>Simpler assertions</li>
                         <li>Test fixtures</li>
                         <li>Plugins</li>
+                        <li>And lots of &ldquo;quality of life&rdquo; improvements</li>
                     </ul>
 
                     <aside class="notes">
-                        Actually, current versions of unittest do discovery too, although I've had better luck with pytest's.
+                        And pytest's discovery can be customized if you need it do.  Actually, current versions of unittest do discovery too, although I've had better luck with pytest's.
                     </aside>
                 </section>
 
@@ -306,7 +319,7 @@ In [9]: %save test_fib.py 1 6-8
                     </code></pre>
                 </section>
 
-                <section>
+                <section style="display: none">
                     <h3>pytest Assertions</h3>
 
                     <p>&hellip;into this.</p>
@@ -329,14 +342,9 @@ In [9]: %save test_fib.py 1 6-8
                     @py_assert0 = @py_assert2 = @py_assert4 = @py_assert5 = @py_assert6 = None
                     </code></pre>
 
-                    <p>(You are not expected to understand this.)</p>
+                    <p class="fragment">(You are not expected to understand this.)</p>
 
                     <aside class="notes">This is magical, and magic code is often bad &mdash; it's even part of the Zen of Python that &ldquo;explicit is better than implicit.&rdquo; But, sometimes, some magic can be nice; for unit testing in particular, it saves a lot of boilerplate.</aside>
-                </section>
-
-                <section>
-                    <h3>pytest Fixtures</h3>
-                    <!-- TODO: populate this -->
                 </section>
 
                 <section>
@@ -361,14 +369,91 @@ In [9]: %save test_fib.py 1 6-8
                 </section>
 
                 <section>
-                    <h3>Tips and Tricks</h3>
-                    <!-- TODO: pdb, including --pdb; filtering tests; expected exceptions; running a test directly? -->
+                    <h3>pytest-xdist</h3>
+
+                    <p>Run tests across multiple CPUs or hosts.</p>
+                    <p>Run tests repeatedly on file change (similar to pytest-watch).</p>
+                    <p>Run tests on multiple environments.</p>
+                </section>
+
+                <section data-hide-in-demo>
+                    <h3>Example: Reporting Slow Tests</h3>
+
+                    <p>Report the 3 slowest tests, so that you know what to work on:</p>
+
+                    <pre><code>pytest --durations=3</code></pre>
+                </section>
+
+                <section data-hide-in-demo>
+                    <h3>Example: Expected Assertions</h3>
+
+                    <pre><code data-trim>
+                    def test_negative_numbers():
+                        with pytest.raises(ValueError):
+.                           fib(-1)
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Case Study: Automating GUI Tests with pywinauto</h2>
+
+                    <aside class="notes">
+                        So far, we've been focusing on unit tests.  That's pytest's
+                        intended usage, and that ought to be where you spend most of
+                        your automated testing efforts.  But pytest is also good for
+                        integration and system tests.  I've been using it to do GUI
+                        test automation of a legacy C++ application that we maintain.
+                        This happens to be a good demonstration of some more unique
+                        pytest features.
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>pytest Fixtures</h3>
+
+                    <pre><code data-trim>
+                    @pytest.fixture
+                    def notepad():
+                        notepad = pywinauto.Application().start('notepad.exe')
+                        yield notepad
+                        notepad.close()
+
+                    def test_copy(notepad):
+                        notepad.UntitledNotepad.Edit.type_keys('Hello')
+                        notepad.UntitledNotepad.Edit.type_keys('^A^C')
+                        assert pywinauto.clipboard.GetData() == 'Hello'
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Using pytest with pdb</h3>
+                    <p>Optionally, install PDB++:</p>
+                    <pre><code>pip install pdbpp</code></pre>
+
+                    <p>Manually set a breakpoint:</p>
+                    <pre><code>import pdb; pdb.set_trace()</code></pre>
+
+                    <p>Or break on the first failure:</p>
+                    <pre><code>pytest --pdb -x</code></pre>
+
+                    <aside class="notes">
+                        All of this makes for a very fluid coding style: Write code then manipulate it in IPython. Write code then let pytest-watch automatically run it.  Run code then use pdb to manipulate it.  Manipulate it in IPython then save it as new code.
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>Filtering Tests</h3>
+
+                    <pre><code data-trim>
+                    pytest test_notepad.py
+                    pytest test_notepad.py::TestFileIO::test_save
+                    </code></pre>
                 </section>
 
                 <section>
                     <h3>Further Reading</h3>
 
-                    <p><i>Professionalism and Test-Driven Development</i>, Robert C. Martin, IEEE Software, Vol. 24, Issue 3</p>
+                    <p>&ldquo;Professionalism and Test-Driven Development,&rdquo; Robert C. Martin, IEEE Software, Vol. 24, Issue 3</p>
 
                     <p><a href="https://martinfowler.com/bliki/UnitTest.html">UnitTest</a> and <a href="https://martinfowler.com/bliki/SelfTestingCode.html">SelfTestingCode</a>, Martin Fowler</p>
 
@@ -400,6 +485,13 @@ In [9]: %save test_fib.py 1 6-8
 		<script src="js/reveal.js"></script>
 
 		<script>
+            var isLiveDemo = true;
+            if (isLiveDemo) {
+                Array.prototype.forEach.call(document.querySelectorAll('section[data-hide-in-demo]'), function(el) {
+                    el.remove();
+                })
+            }
+
 			// More info about config & dependencies:
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies

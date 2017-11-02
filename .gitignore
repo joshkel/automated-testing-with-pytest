@@ -13,3 +13,5 @@ css/reveal.min.css
 js/reveal.min.js
 __pycache__/
 .cache/
+**/*.pyc
+demo/env/
