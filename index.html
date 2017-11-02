@@ -95,6 +95,29 @@ In [8]: assert fib(6) == 8
                     <aside class="notes">This gets controversial in a hurry.</aside>
                 </section>
 
+                <section>
+                    <h3>Terminology</h3>
+
+                    <dl>
+                        <dt class="fragment" data-fragment-index=5>Automated testing</dt>
+                        <dd class="fragment" data-fragment-index=5>The opposite of manual testing</dd>
+
+                        <dt class="fragment" data-fragment-index=2>Unit testing</dt>
+                        <dd class="fragment" data-fragment-index=2>Testing a single function, class, or method</dd>
+
+                        <dt class="fragment" data-fragment-index=1>Test-driven development</dt>
+                        <dd class="fragment" data-fragment-index=1>Writing tests before you write the code</dd>
+
+                        <dt class="fragment" data-fragment-index=3>Integration testing or component testing</dt>
+                        <dd class="fragment" data-fragment-index=3>Testing a group of related units together</dd>
+
+                        <dt class="fragment" data-fragment-index=4>System testing or end-to-end testing</dt>
+                        <dd class="fragment" data-fragment-index=4>Tests that are run against the entire system</dd>
+                    </dl>
+
+                    <aside class="notes">There are terminology differences here; e.g., Uncle Bob says integration tests are a higher level than component tests.</aside>
+                </section>
+
                 <section class="align-left">
                     <a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"><img data-src="img/clean-code.jpg" class="float-right" width=188 height=249 alt="Clean Code"></a>
 
@@ -169,35 +192,15 @@ In [8]: assert fib(6) == 8
                         <li class="fragment">Interactive computing</li>
                         <li class="fragment">Syntax highlighting</li>
                         <li class="fragment">IDE code analysis</li>
-                        <li class="fragment">On-site customers</li>
+                        <li class="fragment">Agile software development</li>
                         <li class="fragment">Continuous integration</li>
-                        <li class="fragment">Continuous deployment</li>
                     </ul>
 
                     <p class="fragment">And automated testing</p>
                 </section>
 
                 <section>
-                    <h3>Terminology</h3>
-
-                    <dl>
-                        <dt class="fragment" data-fragment-index=1>Test-driven development</dt>
-                        <dd class="fragment" data-fragment-index=1>Writing tests before you write the code</dd>
-
-                        <dt class="fragment" data-fragment-index=2>Unit testing</dt>
-                        <dd class="fragment" data-fragment-index=2>Testing a single function, class, or method</dd>
-
-                        <dt class="fragment" data-fragment-index=3>Integration testing or component testing</dt>
-                        <dd class="fragment" data-fragment-index=3>Testing a group of related units together</dd>
-
-                        <dt class="fragment" data-fragment-index=4>System testing or end-to-end testing</dt>
-                        <dd class="fragment" data-fragment-index=4>Tests that are run against the entire system</dd>
-
-                        <dt class="fragment" data-fragment-index=5>Automated testing</dt>
-                        <dd class="fragment" data-fragment-index=5>The opposite of manual testing</dd>
-                    </dl>
-
-                    <aside class="notes">There are terminology differences here; e.g., Uncle Bob says integration tests are a higher level than component tests.</aside>
+                    <h2>Putting It into Practice</h2>
                 </section>
 
                 <section>
@@ -236,6 +239,26 @@ In [8]: assert fib(6) == 8
                         supports test discovery, so you don't need to do
                         anything special to tell it what tests to run.
                     </aside>
+                </section>
+
+                <section>
+                    <h3>Switching to pytest</h3>
+
+                    <pre><code data-trim>
+                    from fib import fib
+                    import unittest
+
+                    class FibTestCase(unittest.TestCase):
+                        def test_fib(self):
+                            self.assertEqual(fib(1), 1)
+                            self.assertEqual(fib(2), 1)
+                            self.assertEqual(fib(3), 2)
+                            self.assertEqual(fib(4), 3)
+                            self.assertEqual(fib(5), 5)
+
+                    if __name__ == '__main__':
+                        unittest.main()
+                    </code></pre>
                 </section>
 
                 <section>
@@ -354,18 +377,20 @@ In [8]: assert fib(6) == 8
                 </section>
 
                 <section>
-                    <h3>pytest-watch</h3>
-
-                    <p>Run <code>ptw</code>, and your tests will be automatically executed whenever your code changes.</p>
-                </section>
-
-                <section>
                     <h3>pytest Coverage</h3>
 
                     <pre><code data-trim>
                     pip install pytest-cov
                     pytest --cov=. --cov-report=html:../cov_html
                     </code></pre>
+
+                    <aside class="notes">There's some controversy over how you should use code coverage and whether you should target a particular percentage, but at minimum, it gives valuable information into how effective your test suite is.</aside>
+                </section>
+
+                <section>
+                    <h3>pytest-watch</h3>
+
+                    <p>Run <code>ptw</code>, and your tests will be automatically executed whenever your code changes.</p>
                 </section>
 
                 <section>
@@ -376,7 +401,7 @@ In [8]: assert fib(6) == 8
                     <p>Run tests on multiple environments.</p>
                 </section>
 
-                <section data-hide-in-demo>
+                <section>
                     <h3>Example: Reporting Slow Tests</h3>
 
                     <p>Report the 3 slowest tests, so that you know what to work on:</p>
@@ -384,7 +409,7 @@ In [8]: assert fib(6) == 8
                     <pre><code>pytest --durations=3</code></pre>
                 </section>
 
-                <section data-hide-in-demo>
+                <section>
                     <h3>Example: Expected Assertions</h3>
 
                     <pre><code data-trim>
