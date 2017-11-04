@@ -90,6 +90,20 @@ In [8]: assert fib(6) == 8
                 </section>
 
                 <section>
+                    <h3>A Typical Small Automated Test (Unit Test)</h3>
+
+                    <p>A function or class with the following structure:</p>
+
+                    <ol>
+                        <li class="fragment">Arrange &mdash; set up inputs and preconditions</li>
+                        <li class="fragment">Act &mdash; do the operation</li>
+                        <li class="fragment">Assert &mdash; verify the results</li>
+                    </ol>
+
+                    <aside class="notes">Unit testing frameworks like unittest and pytest offer helpers, but that's really all there is to it.</aside>
+                </section>
+
+                <section>
                     <h2>What's the Best Way to Do Automated Testing?</h2>
 
                     <aside class="notes">This gets controversial in a hurry.</aside>
@@ -99,23 +113,26 @@ In [8]: assert fib(6) == 8
                     <h3>Terminology</h3>
 
                     <dl>
-                        <dt class="fragment" data-fragment-index=5>Automated testing</dt>
-                        <dd class="fragment" data-fragment-index=5>The opposite of manual testing</dd>
+                        <dt class="fragment" data-fragment-index=1>Automated testing</dt>
+                        <dd class="fragment" data-fragment-index=1>The opposite of manual testing</dd>
 
                         <dt class="fragment" data-fragment-index=2>Unit testing</dt>
                         <dd class="fragment" data-fragment-index=2>Testing a single function, class, or method</dd>
 
-                        <dt class="fragment" data-fragment-index=1>Test-driven development</dt>
-                        <dd class="fragment" data-fragment-index=1>Writing tests before you write the code</dd>
+                        <dt class="fragment" data-fragment-index=3>Test-driven development</dt>
+                        <dd class="fragment" data-fragment-index=3>Writing tests before you write the code</dd>
 
-                        <dt class="fragment" data-fragment-index=3>Integration testing or component testing</dt>
-                        <dd class="fragment" data-fragment-index=3>Testing a group of related units together</dd>
+                        <dt class="fragment" data-fragment-index=4>Integration testing or component testing</dt>
+                        <dd class="fragment" data-fragment-index=4>Testing a group of related units together</dd>
 
-                        <dt class="fragment" data-fragment-index=4>System testing or end-to-end testing</dt>
-                        <dd class="fragment" data-fragment-index=4>Tests that are run against the entire system</dd>
+                        <dt class="fragment" data-fragment-index=5>System testing or end-to-end testing</dt>
+                        <dd class="fragment" data-fragment-index=5>Tests that are run against the entire system</dd>
                     </dl>
 
-                    <aside class="notes">There are terminology differences here; e.g., Uncle Bob says integration tests are a higher level than component tests.</aside>
+                    <aside class="notes">
+                        <p>There are terminology differences here; e.g., Uncle Bob says integration tests are a higher level than component tests.</p>
+                        <p>All of these focus on functional testing &mdash; does the code do what it says it does?  There's also non-functional testing - load testing, security testing, etc. A lot of that can be automated too, but that's outside of the scope of tonight's talk.</p>
+                    </aside>
                 </section>
 
                 <section class="align-left">
@@ -133,7 +150,7 @@ In [8]: assert fib(6) == 8
 
                     <p>&mdash; <a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882">Robert C. Martin, <i>Clean Code</i></a></p>
 
-                    <aside class="notes">Here's one view. <i>Clean Code</i> is one of the best programming books I've read, but I'm not certain I agree. And Uncle Bob can be pretty dogmatic&mdash; he compares TDD to doctors washing their hands and strongly implies it's unprofessional not to do it.</aside>
+                    <aside class="notes">Here's one view. And Uncle Bob can be pretty dogmatic about it&mdash; he compares TDD to doctors washing their hands and strongly implies it's unprofessional not to do it.  <i>Clean Code</i> is one of the best programming books I've read, but I'm not certain I agree.  Writing tests ahead of time is one effective way of getting good test coverage, but it's not the only way.</aside>
                 </section>
 
                 <section class="align-left">
@@ -224,25 +241,20 @@ In [8]: assert fib(6) == 8
                 </section>
 
                 <section>
-                    <h3>Switching to pytest</h3>
+                    <h3>pytest Benefits</h3>
 
-                    <ol>
-                        <li class="fragment"><code>pip install pytest</code></li>
-                        <li class="fragment">Run <code>pytest</code> instead of <code>./my_test_suite.py</code></li>
-                        <li class="fragment">That's it!</li>
-                    </ol>
-
-                    <p class="fragment">(or use <a href="https://pypi.python.org/pypi/unittest2pytest/">unittest2pytest</a>)</p>
-
-                    <aside class="notes">
-                        pytest is drop-in-compatible with unittest, and it
-                        supports test discovery, so you don't need to do
-                        anything special to tell it what tests to run.
-                    </aside>
+                    <ul>
+                        <li>Test discovery</li>
+                        <li>No need to inherit from TestCase</li>
+                        <li>Simpler assertions</li>
+                        <li>Plugins</li>
+                        <li>Test fixtures</li>
+                        <li>And lots of &ldquo;quality of life&rdquo; improvements</li>
+                    </ul>
                 </section>
 
                 <section>
-                    <h3>Switching to pytest</h3>
+                    <h3>Switching from unittest</h3>
 
                     <pre><code data-trim>
                     from fib import fib
@@ -277,19 +289,37 @@ In [8]: assert fib(6) == 8
                 </section>
 
                 <section>
-                    <h3>pytest Benefits</h3>
+                    <h3>Switching to pytest</h3>
+
+                    <ol>
+                        <li class="fragment"><code>pip install pytest</code></li>
+                        <li class="fragment">Run <code>pytest</code> instead of <code>./my_test_suite.py</code></li>
+                        <li class="fragment">That's it!</li>
+                    </ol>
+
+                    <p class="fragment">(or use <a href="https://pypi.python.org/pypi/unittest2pytest/">unittest2pytest</a>)</p>
+
+                    <aside class="notes">
+                        pytest is drop-in-compatible with unittest, and it
+                        supports test discovery, so you don't need to do
+                        anything special to tell it what tests to run.
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>Test Discovery</h3>
+
+                    <p>By default:</p>
 
                     <ul>
-                        <li>Test discovery (any <code>*_test.py</code> or <code>test_*.py</code>)</li>
-                        <li>No need to inherit from TestCase</li>
-                        <li>Simpler assertions</li>
-                        <li>Test fixtures</li>
-                        <li>Plugins</li>
-                        <li>And lots of &ldquo;quality of life&rdquo; improvements</li>
+                        <li class="fragment">Search recursively under the current directory</li>
+                        <li class="fragment">Any file named <code>test_*.py</code> or <code>_*test.py</code></li>
+                        <li class="fragment">Any class starting with <code>Test</code></li>
+                        <li class="fragment">Any function starting with <code>test_</code></li>
                     </ul>
 
                     <aside class="notes">
-                        And pytest's discovery can be customized if you need it do.  Actually, current versions of unittest do discovery too, although I've had better luck with pytest's.
+                        Actually, current versions of unittest do discovery too, although I've had better luck with pytest's.
                     </aside>
                 </section>
 
@@ -415,7 +445,7 @@ In [8]: assert fib(6) == 8
                     <pre><code data-trim>
                     def test_negative_numbers():
                         with pytest.raises(ValueError):
-.                           fib(-1)
+                            fib(-1)
                     </code></pre>
                 </section>
 
@@ -503,6 +533,15 @@ In [8]: assert fib(6) == 8
 
                         <li><a href="https://www.amazon.com/Clean-Coder-Conduct-Professional-Programmers/dp/0137081073"><img data-src="img/clean-coder.jpg" width=192 height=249><i>The Clean Coder</i>, by Robert C. Martin</a></li>
                     </ul>
+                </section>
+
+                <section>
+                    <h4>Image Credits</h4>
+
+                    <p><i>The Dark Knight</i> &copy; Warner Bros. 2017.</p>
+
+                    <p><i>The Lord of the Rings</i> film trilogy &copy; New Line Cinema 2001, 2002, 2003</p>
+                </section>
 			</div>
 		</div>
 
