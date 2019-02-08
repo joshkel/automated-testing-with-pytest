@@ -12,4 +12,3 @@ Presentation created with [Reveal.js](https://github.com/hakimel/reveal.js#marku
 
 * I'd like a better example for arrange - act - assert.
 * Give an example of pytest showing details of failing test arguments.
-* Show a sample code coverage report.
