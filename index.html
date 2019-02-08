@@ -548,7 +548,7 @@ In [8]: assert fib(6) == 8
                     <pre><code>pytest --pdb -x</code></pre>
 
                     <aside class="notes">
-                        All of this makes for a very fluid coding style: Write code then manipulate it in IPython. Write code then let pytest-watch automatically run it.  Run code then use pdb to manipulate it.  Manipulate it in IPython then save it as new code.
+                        All of this makes for a very fluid coding style: Write code then play around with it in IPython. Write code then let pytest-watch automatically run it.  Run code then use pdb to manipulate it.  Play around with some code in IPython then save it as new code.
                     </aside>
                 </section>
 
@@ -621,7 +621,7 @@ In [8]: assert fib(6) == 8
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: () => hljs.initHighlightingOnLoad() }
 				]
 			});
 		</script>
