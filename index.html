@@ -455,7 +455,7 @@ assert payroll.withheld == 5000
                     </code></pre>
                 </section>
 
-                <section style="display: none">
+                <section>
                     <h3>pytest Assertions</h3>
 
                     <p>&hellip;into this.</p>
@@ -481,6 +481,50 @@ assert payroll.withheld == 5000
                     <p class="fragment">(You are not expected to understand this.)</p>
 
                     <aside class="notes">This is magical, and magic code is often bad &mdash; it's even part of the Zen of Python that &ldquo;explicit is better than implicit.&rdquo; But, sometimes, some magic can be nice; for unit testing in particular, it saves a lot of boilerplate.</aside>
+                </section>
+
+                <section>
+                    <h3>Pytest Assertions</h3>
+
+                    <pre><code data-trim>
+                        a = 1
+                        b = 2
+                        assert a + b == 4
+                    </code></pre>
+
+                    <p>Sample output:</p>
+
+                    <pre><code class="markdown" data-trim data-noescape>
+                            a = 1
+                            b = 2
+                    &#8203;>       assert a + b == 4
+                    <span style="color: red">E       assert (1 + 2) == 4</span>
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Pytest Assertions</h3>
+
+                    <pre><code data-trim>
+                        actual   = {'first_name': 'John', 'last_name': 'Doe',
+                                    'city': 'Nashville', 'state': 'TN'}
+
+                        expected = {'first_name': 'John', 'last_name': 'Doe',
+                                    'city': 'Memphis', 'state': 'TN'}
+
+                        assert actual == expected
+                    </code></pre>
+
+                    <p>Sample output:</p>
+
+                    <pre><code class="markdown" data-trim data-noescape>
+                        &#8203;>       assert actual == expected
+                        <span style="color:red">E       AssertionError: assert {'city': 'Nas...'state': 'TN'} == {'city': 'Knox...'state': 'TN'}
+                        E         Omitting 3 identical items, use -vv to show
+                        E         Differing items:
+                        E         {'city': 'Nashville'} != {'city': 'Knoxville'}
+                        E         Use -v to get the full diff</span>
+                    </code></pre>
                 </section>
 
                 <section>
