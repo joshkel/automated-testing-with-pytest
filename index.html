@@ -39,8 +39,60 @@
                 <section>
                     <h3>Write Some Code</h3>
 
-                    <p>Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34&hellip;</p>
+                    <p>Fibonacci sequence:</p>
 
+                    <table class="number-sequence">
+                        <tr>
+                            <td>0,</td>
+                            <td>1,</td>
+                            <td>1,</td>
+                            <td>2,</td>
+                            <td>3,</td>
+                            <td>5,</td>
+                            <td>8,</td>
+                            <td>13,</td>
+                            <td>21,</td>
+                            <td>34</td>
+                            <td class="ellipse">&hellip;</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>0<span class="hidden">,</span></td>
+                            <td>+ 1<span class="hidden">,</span></td>
+                            <td>= 1<span class="hidden">,</span></td>
+                        </tr>
+                        <tr class="fragment">
+                            <td></td>
+                            <td>1<span class="hidden">,</span></td>
+                            <td>+ 1<span class="hidden">,</span></td>
+                            <td>= 2<span class="hidden">,</span></td>
+                        </tr>
+                        <tr class="fragment">
+                            <td></td>
+                            <td></td>
+                            <td>1<span class="hidden">,</span></td>
+                            <td>+ 2<span class="hidden">,</span></td>
+                            <td>= 3<span class="hidden">,</span></td>
+                        </tr>
+                        <tr class="fragment">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>2<span class="hidden">,</span></td>
+                            <td>+ 3<span class="hidden">,</span></td>
+                            <td>= 5<span class="hidden">,</span></td>
+                        </tr>
+                    </table>
+                    <aside class="notes">
+                        <p>This is a pretty artificial example; we're probably not calculating
+                        Fibonacci sequences in our day jobs.  But it works for our purposes.</p>
+                        <p>Fibonacci sequences are actually pretty interesting.  Each number is roughly half again as big as the previous.  They show up in nature: branching in trees, arrangement of leaves on a stem, how pineapples and artichokes and pine cones grow, an uncurling fern, and the family trees of honeybees (Wikipedia).  So this isn't just abstract arithmetic.</p>
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>Write Some Code</h3>
+
+                    <p>Fibonacci sequence:</p>
                     <pre><code data-trim>
                     def fib(n):
                         if n == 0:
@@ -130,8 +182,8 @@ In [8]: assert fib(6) == 8
                     </dl>
 
                     <aside class="notes">
-                        <p>There are terminology differences here; e.g., Uncle Bob says integration tests are a higher level than component tests.</p>
-                        <p>All of these focus on functional testing &mdash; does the code do what it says it does?  There's also non-functional testing - load testing, security testing, etc. A lot of that can be automated too, but that's outside of the scope of tonight's talk.</p>
+                        <p>There are terminology differences here; e.g., Uncle Bob says integration tests are a higher level than component tests.  A few folks will argue that unit tests should aim at units of behavior, not units of code, so higher level than individual classes or methods.  But, if you use these general terms, you'll probably be understood by whoever you're talking with.</p>
+                        <p>All of these focus on functional testing &mdash; does the code do what it says it does?  There's also non-functional testing - load testing, security testing, etc. A lot of that can be automated too, but that's outside of the scope of today's talk.</p>
                     </aside>
                 </section>
 
@@ -144,13 +196,13 @@ In [8]: assert fib(6) == 8
                     <!-- Manual styling to allow flowing around title image -->
                     <ol style="width: calc(100% - 250px)">
                         <li>You may not write production code until you have written a failing unit test.</li>
-                        <li>You may not write more of a unit test than is sufficient to fail, and not compiling is failing.</li>
+                        <li>You may not write more of a unit test than is sufficient to fail&hellip;</li>
                         <li>You may not write more production code than is sufficient to pass the currently failing test.</li>
                     </ol>
 
                     <p>&mdash; <a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882">Robert C. Martin, <i>Clean Code</i></a></p>
 
-                    <aside class="notes">Here's one view. And Uncle Bob can be pretty dogmatic about it&mdash; he compares TDD to doctors washing their hands and strongly implies it's unprofessional not to do it.  <i>Clean Code</i> is one of the best programming books I've read, but I'm not certain I agree.  Writing tests ahead of time is one effective way of getting good test coverage, but it's not the only way.</aside>
+                    <aside class="notes">Here's one view. And Uncle Bob can be pretty dogmatic about it&mdash; he compares TDD to doctors washing their hands and strongly implies it's unprofessional not to do it.  <i>Clean Code</i> is one of the best programming books I've read, but I'm not certain I agree.  Writing tests ahead of time is one effective way of having good automated tests, but it's not the only way.</aside>
                 </section>
 
                 <section class="align-left">
@@ -313,7 +365,7 @@ In [8]: assert fib(6) == 8
 
                     <ul>
                         <li class="fragment">Search recursively under the current directory</li>
-                        <li class="fragment">Any file named <code>test_*.py</code> or <code>_*test.py</code></li>
+                        <li class="fragment">Any file named <code>test_*.py</code> or <code>*_test.py</code></li>
                         <li class="fragment">Any class starting with <code>Test</code></li>
                         <li class="fragment">Any function starting with <code>test_</code></li>
                     </ul>
@@ -403,6 +455,7 @@ In [8]: assert fib(6) == 8
                 <section>
                     <h3>pytest Plugins</h3>
 
+                    <a href="https://docs.pytest.org/en/latest/plugins.html">docs.pytest.org/en/latest/plugins.html</a>
                     <a href="http://plugincompat.herokuapp.com/">plugincompat.herokuapp.com</a>
                 </section>
 
