@@ -147,12 +147,43 @@ In [8]: assert fib(6) == 8
                     <p>A function or class with the following structure:</p>
 
                     <ol>
-                        <li class="fragment">Arrange &mdash; set up inputs and preconditions</li>
-                        <li class="fragment">Act &mdash; do the operation</li>
-                        <li class="fragment">Assert &mdash; verify the results</li>
+                        <li class="fragment" data-fragment-index=1>Arrange &mdash; set up inputs and preconditions</li>
+                        <li class="fragment" data-fragment-index=2>Act &mdash; do the operation</li>
+                        <li class="fragment" data-fragment-index=3>Assert &mdash; verify the results</li>
                     </ol>
 
-                    <aside class="notes">Unit testing frameworks like unittest and pytest offer helpers, but that's really all there is to it.</aside>
+                    <div class="relative">
+                        <pre class="absolute fragment" class="fragment" data-fragment-index=1><code data-trim>
+employee = Employee('John', 'Doe')
+employee.state = 'TN'
+employee.city = 'Nashville'
+employee.salary = 56516
+                        </code></pre>
+                        <pre class="absolute fragment" class="fragment" data-fragment-index=2><code data-trim>
+employee = Employee('John', 'Doe')
+employee.state = 'TN'
+employee.city = 'Nashville'
+employee.salary = 56516
+
+payroll = employee.calculate_payroll()
+                        </code></pre>
+                        <pre class="absolute fragment" class="fragment" data-fragment-index=3><code data-trim>
+employee = Employee('John', 'Doe')
+employee.state = 'TN'
+employee.city = 'Nashville'
+employee.salary = 56516
+
+payroll = employee.calculate_payroll()
+
+assert payroll.withheld == 5000
+                        </code></pre>
+                    </div>
+
+                    <aside class="notes">
+                        <p>Median American salary</p>
+                        <p>I have no idea if this is realistic or not.  My wife does our taxes.</p>
+                        <p>Unit testing frameworks like unittest and pytest offer helpers, but that's really all there is to it.</p>
+                    </aside>
                 </section>
 
                 <section>
@@ -622,7 +653,6 @@ In [8]: assert fib(6) == 8
                     { src: 'plugin/markdown/markdown.js' },
                     { src: 'plugin/notes/notes.js', async: true },
                     { src: 'plugin/highlight/highlight.js', async: true, callback: () => hljs.initHighlightingOnLoad() },
-                    { src: 'js/reveal-code-focus.js', callback: () => RevealCodeFocus(true) },
                 ]
             });
         </script>
