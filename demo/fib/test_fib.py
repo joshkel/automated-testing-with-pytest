@@ -1,5 +1,5 @@
 from fib import fib
-import pytest
+
 
 def test_fib():
     assert fib(0) == 0
@@ -8,8 +8,10 @@ def test_fib():
     assert fib(4) == 3
     assert fib(5) == 5
 
+
 def test_negative_fib():
     pass
+
 
 def test_big_fib():
     assert fib(30) == 832040

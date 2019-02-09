@@ -1,35 +1,46 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Making Pytest Your Batman</title>
+        <title>Making Pytest Your Batman</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/solarized.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/solarized.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
 
         <link rel="stylesheet" href="css/pytest.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
                 <section>
                     <h1>Automated Testing with Pytest</h1>
                     <h3 class="fragment">or</h3>
                     <h2 class="fragment">Making Pytest Your Batman 🦇</h2>
+                </section>
+
+                <section>
+                    <h2>Who am I?</h2>
+                    <div class="flex-columns flex-centered">
+                        <div>Josh Kelley</div>
+                        <div>
+                            <img class="plain-image" width=275 height=79 src="img/corgibytes-logo.png"/>
+                        </div>
+                    </div>
                 </section>
 
                 <section>
@@ -39,23 +50,100 @@
                 <section>
                     <h3>Write Some Code</h3>
 
-                    <p>Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34&hellip;</p>
+                    <p>Fibonacci sequence:</p>
 
+                    <table class="number-sequence">
+                        <tr>
+                            <td>0,</td>
+                            <td>1,</td>
+                            <td>1,</td>
+                            <td>2,</td>
+                            <td>3,</td>
+                            <td>5,</td>
+                            <td>8,</td>
+                            <td>13,</td>
+                            <td>21,</td>
+                            <td>34</td>
+                            <td class="ellipse">&hellip;</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>0<span class="hidden">,</span></td>
+                            <td>+ 1<span class="hidden">,</span></td>
+                            <td>= 1<span class="hidden">,</span></td>
+                        </tr>
+                        <tr class="fragment">
+                            <td></td>
+                            <td>1<span class="hidden">,</span></td>
+                            <td>+ 1<span class="hidden">,</span></td>
+                            <td>= 2<span class="hidden">,</span></td>
+                        </tr>
+                        <tr class="fragment">
+                            <td></td>
+                            <td></td>
+                            <td>1<span class="hidden">,</span></td>
+                            <td>+ 2<span class="hidden">,</span></td>
+                            <td>= 3<span class="hidden">,</span></td>
+                        </tr>
+                        <tr class="fragment">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>2<span class="hidden">,</span></td>
+                            <td>+ 3<span class="hidden">,</span></td>
+                            <td>= 5<span class="hidden">,</span></td>
+                        </tr>
+                    </table>
+                    <aside class="notes">
+                        <p>This is a pretty artificial example; we're probably not calculating
+                        Fibonacci sequences in our day jobs.  But it works for our purposes.</p>
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>Write Some Code</h3>
+
+                    <p>Fibonacci sequence:</p>
+
+                    <table class="number-sequence">
+                        <tr>
+                            <td>0,</td>
+                            <td>1,</td>
+                            <td>1,</td>
+                            <td>2,</td>
+                            <td>3,</td>
+                            <td>5,</td>
+                            <td>8,</td>
+                            <td>13,</td>
+                            <td>21,</td>
+                            <td>34</td>
+                            <td class="ellipse">&hellip;</td>
+                        </tr>
+                    </table>
+                    <img data-src="img/FibonacciSpiral.svg"/>
+                    <aside class="notes">
+                        <p>Fibonacci sequences are actually pretty interesting.  Each number is roughly half again as big as the previous.  They show up in nature: branching in trees, arrangement of leaves on a stem, how pineapples and artichokes and pine cones grow, an uncurling fern, and the family trees of honeybees (Wikipedia).  So this isn't just abstract arithmetic.</p>
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>Write Some Code</h3>
+
+                    <p>Fibonacci sequence:</p>
                     <pre><code data-trim>
-                    def fib(n):
-                        if n == 0:
-                            return 0
-                        elif n == 1:
-                            return 1
-                        else:
-                            return fib(n - 1) + fib(n - 2)
+def fib(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fib(n - 1) + fib(n - 2)
                     </code></pre>
                 </section>
 
                 <section>
                     <h3>Test It Out</h3>
 
-                    <pre><code data-trim>
+                    <pre><code class="oxygene" data-trim>
 In [1]: from fib import fib
 
 In [2]: fib(1)
@@ -69,7 +157,13 @@ Out[4]: 3
 
 In [5]: fib(5)
 Out[5]: 5
+                    </code></pre>
+                </section>
 
+                <section>
+                    <h3>Test It Out</h3>
+
+                    <pre><code class="oxygene" data-trim>
 In [6]: assert fib(2) == 1
 
 In [7]: assert fib(5) == 5
@@ -95,12 +189,43 @@ In [8]: assert fib(6) == 8
                     <p>A function or class with the following structure:</p>
 
                     <ol>
-                        <li class="fragment">Arrange &mdash; set up inputs and preconditions</li>
-                        <li class="fragment">Act &mdash; do the operation</li>
-                        <li class="fragment">Assert &mdash; verify the results</li>
+                        <li class="fragment" data-fragment-index=1>Arrange &mdash; set up inputs and preconditions</li>
+                        <li class="fragment" data-fragment-index=2>Act &mdash; do the operation</li>
+                        <li class="fragment" data-fragment-index=3>Assert &mdash; verify the results</li>
                     </ol>
 
-                    <aside class="notes">Unit testing frameworks like unittest and pytest offer helpers, but that's really all there is to it.</aside>
+                    <div class="relative">
+                        <pre class="absolute fragment" class="fragment" data-fragment-index=1><code data-trim>
+employee = Employee('John', 'Doe')
+employee.state = 'TN'
+employee.city = 'Nashville'
+employee.salary = 56516
+                        </code></pre>
+                        <pre class="absolute fragment" class="fragment" data-fragment-index=2><code data-trim>
+employee = Employee('John', 'Doe')
+employee.state = 'TN'
+employee.city = 'Nashville'
+employee.salary = 56516
+
+payroll = employee.calculate_payroll()
+                        </code></pre>
+                        <pre class="absolute fragment" class="fragment" data-fragment-index=3><code data-trim>
+employee = Employee('John', 'Doe')
+employee.state = 'TN'
+employee.city = 'Nashville'
+employee.salary = 56516
+
+payroll = employee.calculate_payroll()
+
+assert payroll.withheld == 5000
+                        </code></pre>
+                    </div>
+
+                    <aside class="notes">
+                        <p>Median American salary</p>
+                        <p>I have no idea if this is realistic or not.  My wife does our taxes.</p>
+                        <p>Unit testing frameworks like unittest and pytest offer helpers, but that's really all there is to it.</p>
+                    </aside>
                 </section>
 
                 <section>
@@ -130,8 +255,8 @@ In [8]: assert fib(6) == 8
                     </dl>
 
                     <aside class="notes">
-                        <p>There are terminology differences here; e.g., Uncle Bob says integration tests are a higher level than component tests.</p>
-                        <p>All of these focus on functional testing &mdash; does the code do what it says it does?  There's also non-functional testing - load testing, security testing, etc. A lot of that can be automated too, but that's outside of the scope of tonight's talk.</p>
+                        <p>There are terminology differences here.  But, if you use these general terms, you'll probably be understood by whoever you're talking with.</p>
+                        <p>All of these focus on functional testing &mdash; does the code do what it says it does?  There's also non-functional testing - load testing, security testing, etc. A lot of that can be automated too, but that's outside of the scope of today's talk.</p>
                     </aside>
                 </section>
 
@@ -144,13 +269,13 @@ In [8]: assert fib(6) == 8
                     <!-- Manual styling to allow flowing around title image -->
                     <ol style="width: calc(100% - 250px)">
                         <li>You may not write production code until you have written a failing unit test.</li>
-                        <li>You may not write more of a unit test than is sufficient to fail, and not compiling is failing.</li>
+                        <li>You may not write more of a unit test than is sufficient to fail&hellip;</li>
                         <li>You may not write more production code than is sufficient to pass the currently failing test.</li>
                     </ol>
 
                     <p>&mdash; <a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882">Robert C. Martin, <i>Clean Code</i></a></p>
 
-                    <aside class="notes">Here's one view. And Uncle Bob can be pretty dogmatic about it&mdash; he compares TDD to doctors washing their hands and strongly implies it's unprofessional not to do it.  <i>Clean Code</i> is one of the best programming books I've read, but I'm not certain I agree.  Writing tests ahead of time is one effective way of getting good test coverage, but it's not the only way.</aside>
+                    <aside class="notes">Here's one view. And Uncle Bob can be pretty dogmatic about it&mdash; he compares TDD to doctors washing their hands and strongly implies it's unprofessional not to do it.  <i>Clean Code</i> is one of the best programming books I've read, but I'm not certain I agree.  Writing tests ahead of time is one effective way of having good automated tests, but it's not the only way.</aside>
                 </section>
 
                 <section class="align-left">
@@ -313,7 +438,7 @@ In [8]: assert fib(6) == 8
 
                     <ul>
                         <li class="fragment">Search recursively under the current directory</li>
-                        <li class="fragment">Any file named <code>test_*.py</code> or <code>_*test.py</code></li>
+                        <li class="fragment">Any file named <code>test_*.py</code> or <code>*_test.py</code></li>
                         <li class="fragment">Any class starting with <code>Test</code></li>
                         <li class="fragment">Any function starting with <code>test_</code></li>
                     </ul>
@@ -372,7 +497,7 @@ In [8]: assert fib(6) == 8
                     </code></pre>
                 </section>
 
-                <section style="display: none">
+                <section>
                     <h3>pytest Assertions</h3>
 
                     <p>&hellip;into this.</p>
@@ -401,8 +526,53 @@ In [8]: assert fib(6) == 8
                 </section>
 
                 <section>
+                    <h3>Pytest Assertions</h3>
+
+                    <pre><code data-trim>
+                        a = 1
+                        b = 2
+                        assert a + b == 4
+                    </code></pre>
+
+                    <p>Sample output:</p>
+
+                    <pre><code class="markdown" data-trim data-noescape>
+                            a = 1
+                            b = 2
+                    &#8203;>       assert a + b == 4
+                    <span style="color: red">E       assert (1 + 2) == 4</span>
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Pytest Assertions</h3>
+
+                    <pre><code data-trim>
+                        actual   = {'first_name': 'John', 'last_name': 'Doe',
+                                    'city': 'Nashville', 'state': 'TN'}
+
+                        expected = {'first_name': 'John', 'last_name': 'Doe',
+                                    'city': 'Memphis', 'state': 'TN'}
+
+                        assert actual == expected
+                    </code></pre>
+
+                    <p>Sample output:</p>
+
+                    <pre><code class="markdown" data-trim data-noescape>
+                        &#8203;>       assert actual == expected
+                        <span style="color:red">E       AssertionError: assert {'city': 'Nas...'state': 'TN'} == {'city': 'Knox...'state': 'TN'}
+                        E         Omitting 3 identical items, use -vv to show
+                        E         Differing items:
+                        E         {'city': 'Nashville'} != {'city': 'Memphis'}
+                        E         Use -v to get the full diff</span>
+                    </code></pre>
+                </section>
+
+                <section>
                     <h3>pytest Plugins</h3>
 
+                    <a href="https://docs.pytest.org/en/latest/plugins.html">docs.pytest.org/en/latest/plugins.html</a>
                     <a href="http://plugincompat.herokuapp.com/">plugincompat.herokuapp.com</a>
                 </section>
 
@@ -415,6 +585,12 @@ In [8]: assert fib(6) == 8
                     </code></pre>
 
                     <aside class="notes">There's some controversy over how you should use code coverage and whether you should target a particular percentage, but at minimum, it gives valuable information into how effective your test suite is.</aside>
+                </section>
+
+                <section data-background-iframe="cov_html/index.html" data-background-color="white" class="iframe-2 no-print">
+                </section>
+
+                <section data-background-iframe="cov_html/events_models_py.html" data-background-color="white" class="iframe-2 no-print">
                 </section>
 
                 <section>
@@ -432,11 +608,39 @@ In [8]: assert fib(6) == 8
                 </section>
 
                 <section>
+                    <h3>Using pytest with pdb</h3>
+                    <p>Optionally, install PDB++ or pudb:</p>
+                    <pre><code>pip install pdbpp</code></pre>
+
+                    <p>Manually set a breakpoint:</p>
+                    <pre><code data-trim>
+                        import pdb; pdb.set_trace()
+                        breakpoint()  # Python 3.7
+                    </code></pre>
+
+                    <p>Or break on the first failure:</p>
+                    <pre><code>pytest --pdb -x</code></pre>
+
+                    <aside class="notes">
+                        All of this makes for a very fluid coding style: Write code then play around with it in IPython. Write code then let pytest-watch automatically run it.  Run code then use pdb to manipulate it.  Play around with some code in IPython then save it as new code.
+                    </aside>
+                </section>
+
+                <section>
                     <h3>Example: Reporting Slow Tests</h3>
 
                     <p>Report the 3 slowest tests, so that you know what to work on:</p>
 
                     <pre><code>pytest --durations=3</code></pre>
+                </section>
+
+                <section>
+                    <h3>Filtering Tests</h3>
+
+                    <pre><code data-trim>
+                    pytest test_notepad.py
+                    pytest test_notepad.py::TestFileIO::test_save
+                    </code></pre>
                 </section>
 
                 <section>
@@ -450,16 +654,91 @@ In [8]: assert fib(6) == 8
                 </section>
 
                 <section>
+                    <h3>Example: Test Fixtures</h3>
+
+                    <pre><code data-trim>
+                        import pytest
+
+                        @pytest.fixture
+                        def smtp_connection():
+                            import smtplib
+                            return smtplib.SMTP("smtp.gmail.com", 587, timeout=5)
+
+                        def test_ehlo(smtp_connection):
+                            response, msg = smtp_connection.ehlo()
+                            assert response == 250
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Example: Mocks</h3>
+                </section>
+
+                <section>
+                    <pre><code class="tall-code" data-trim>
+                        import my_api_client
+                        import pytest
+                        import requests_mock
+
+                        @pytest.fixture
+                        def m():
+                            with requests_mock.Mocker() as m:
+                                yield m
+
+                        def test_api_client(m):
+                            # Tell the mock to expect a request for www.example.com
+                            # and send a reply of "Hello, world!" back.
+                            m.get('http://www.example.com', content='Hello, world!')
+
+                            # Execute the code under test.
+                            response = my_api_client.query()
+
+                            # Verify that our mock object was called.
+                            assert m.called
+                            assert m.call_count == 1
+
+                            assert response == 'Hello, world!'
+                    </code></pre>
+
+                    <aside class="notes">
+                        Python's built-in unittest module has some mocking functionality,
+                        which I've used.  It's powerful, but a little fiddly and non-intuitive.
+                        pytest also provides its own mocking functionality, called monkeypatch,
+                        which I haven't yet used.  It's great, though, when you can find
+                        already canned libraries like requests_mock.
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>Example: Mocks</h3>
+
+                    <ul>
+                        <li><a href="https://docs.python.org/3/library/unittest.mock.html">unittest.mock</a></li>
+                        <li>pytest's <a href="https://docs.pytest.org/en/latest/monkeypatch.html">monkeypatch</a></li>
+                        <li><a href="https://requests-mock.readthedocs.io/en/latest/">requests-mock</a></li>
+                        <li><a href="https://github.com/spulec/freezegun">FreezeGun</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Even More Features</h3>
+                    <ul>
+                        <li>Test fixtures for managing temporary directories</li>
+                        <li>Capture log output</li>
+                        <li>Intercept Python warnings and deprecations</li>
+                    </ul>
+                </section>
+
+                <section>
                     <h2>Case Study: Automating GUI Tests with pywinauto</h2>
 
                     <aside class="notes">
                         So far, we've been focusing on unit tests.  That's pytest's
                         intended usage, and that ought to be where you spend most of
                         your automated testing efforts.  But pytest is also good for
-                        integration and system tests.  I've been using it to do GUI
-                        test automation of a legacy C++ application that we maintain.
-                        This happens to be a good demonstration of some more unique
-                        pytest features.
+                        integration and system tests.  I've used it to do GUI test
+                        automation of a legacy C++ application.  This happens to be
+                        a good demonstration of some more unique pytest features.
                     </aside>
                 </section>
 
@@ -477,31 +756,6 @@ In [8]: assert fib(6) == 8
                         notepad.UntitledNotepad.Edit.type_keys('Hello')
                         notepad.UntitledNotepad.Edit.type_keys('^A^C')
                         assert pywinauto.clipboard.GetData() == 'Hello'
-                    </code></pre>
-                </section>
-
-                <section>
-                    <h3>Using pytest with pdb</h3>
-                    <p>Optionally, install PDB++:</p>
-                    <pre><code>pip install pdbpp</code></pre>
-
-                    <p>Manually set a breakpoint:</p>
-                    <pre><code>import pdb; pdb.set_trace()</code></pre>
-
-                    <p>Or break on the first failure:</p>
-                    <pre><code>pytest --pdb -x</code></pre>
-
-                    <aside class="notes">
-                        All of this makes for a very fluid coding style: Write code then manipulate it in IPython. Write code then let pytest-watch automatically run it.  Run code then use pdb to manipulate it.  Manipulate it in IPython then save it as new code.
-                    </aside>
-                </section>
-
-                <section>
-                    <h3>Filtering Tests</h3>
-
-                    <pre><code data-trim>
-                    pytest test_notepad.py
-                    pytest test_notepad.py::TestFileIO::test_save
                     </code></pre>
                 </section>
 
@@ -533,22 +787,46 @@ In [8]: assert fib(6) == 8
 
                         <li><a href="https://www.amazon.com/Clean-Coder-Conduct-Professional-Programmers/dp/0137081073"><img data-src="img/clean-coder.jpg" width=192 height=249><i>The Clean Coder</i>, by Robert C. Martin</a></li>
                     </ul>
+
+                    <aside class="notes">
+                        <p>(besides the two mentioned)</p>
+
+                        <p>
+                        Automated testing is a big topic, and there's obviously a lot I didn't cover.
+                        But hopefully this is enough to let you see that, even though it's a big topic,
+                        it can actually be pretty easy to get started.  And tools like pytest can make
+                        it really easy to get started.  And they can make it really fun to get started.
+                        It's fun to write a few simple tests and see them running automatically in the
+                        background, and get a quick red message as soon as you make a mistake, and
+                        see it green when you fixed it.  And fun is important, because that helps
+                        provide the incentive to go further - to get into the pros and cons of
+                        different techniques and so on.
+                        </p>
+                    </aside>
                 </section>
 
                 <section>
                     <h4>Image Credits</h4>
 
+                    <p><a href="https://en.wikipedia.org/wiki/Fibonacci_number">&ldquo;Fibonacci Number&rdquo;</a>, Wikipedia</p>
+
                     <p><i>The Dark Knight</i> &copy; Warner Bros. 2017.</p>
 
                     <p><i>The Lord of the Rings</i> film trilogy &copy; New Line Cinema 2001, 2002, 2003</p>
                 </section>
-			</div>
-		</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+                <section>
+                    <p><i class="fa fa-github"></i>&nbsp;&nbsp;<a href="https://github.com/joshkel/automated-testing-with-pytest">github.com/joshkel/automated-testing-with-pytest</a></p>
+                    <p><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;<a href="mailto:joshkel@gmail.com">joshkel@gmail.com</a></p>
+                    <p><i class="fa fa-twitter"></i>&nbsp;&nbsp;<a href="https://twitter.com/notthatjoshkel">@notthatjoshkel</a></p>
+                </section>
+            </div>
+        </div>
 
-		<script>
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
             var isLiveDemo = true;
             if (isLiveDemo) {
                 Array.prototype.forEach.call(document.querySelectorAll('section[data-hide-in-demo]'), function(el) {
@@ -556,18 +834,19 @@ In [8]: assert fib(6) == 8
                 })
             }
 
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
+            // More info about config & dependencies:
+            // - https://github.com/hakimel/reveal.js#configuration
+            // - https://github.com/hakimel/reveal.js#dependencies
+            Reveal.initialize({
                 history: true,
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+                pdfSeparateFragments: false,
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js' },
+                    { src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: () => hljs.initHighlightingOnLoad() },
+                ]
+            });
+        </script>
+    </body>
 </html>

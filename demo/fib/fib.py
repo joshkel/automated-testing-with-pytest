@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 def fib(n):
     if n == 0:
         return 0
@@ -7,6 +8,7 @@ def fib(n):
         return 1
     else:
         return fib(n - 1) + fib(n - 2)
+
 
 def closed_form_fib(n):
     # Courtesy of Wolfram Alpha

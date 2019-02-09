@@ -1,4 +1,4 @@
 ipython
 pytest
 pytest-watch
-pywinauto
+# pywinauto
