@@ -574,11 +574,36 @@ assert payroll.withheld == 5000
                 </section>
 
                 <section>
+                    <h3>Using pytest with pdb</h3>
+                    <p>Optionally, install PDB++:</p>
+                    <pre><code>pip install pdbpp</code></pre>
+
+                    <p>Manually set a breakpoint:</p>
+                    <pre><code>import pdb; pdb.set_trace()</code></pre>
+
+                    <p>Or break on the first failure:</p>
+                    <pre><code>pytest --pdb -x</code></pre>
+
+                    <aside class="notes">
+                        All of this makes for a very fluid coding style: Write code then play around with it in IPython. Write code then let pytest-watch automatically run it.  Run code then use pdb to manipulate it.  Play around with some code in IPython then save it as new code.
+                    </aside>
+                </section>
+
+                <section>
                     <h3>Example: Reporting Slow Tests</h3>
 
                     <p>Report the 3 slowest tests, so that you know what to work on:</p>
 
                     <pre><code>pytest --durations=3</code></pre>
+                </section>
+
+                <section>
+                    <h3>Filtering Tests</h3>
+
+                    <pre><code data-trim>
+                    pytest test_notepad.py
+                    pytest test_notepad.py::TestFileIO::test_save
+                    </code></pre>
                 </section>
 
                 <section>
@@ -592,16 +617,89 @@ assert payroll.withheld == 5000
                 </section>
 
                 <section>
+                    <h3>Example: Test Fixtures</h3>
+
+                    <pre><code data-trim>
+                        import pytest
+
+                        @pytest.fixture
+                        def smtp_connection():
+                            import smtplib
+                            return smtplib.SMTP("smtp.gmail.com", 587, timeout=5)
+
+                        def test_ehlo(smtp_connection):
+                            response, msg = smtp_connection.ehlo()
+                            assert response == 250
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Example: Mocks</h3>
+
+                    <pre><code data-trim>
+                        import my_api_client
+                        import pytest
+                        import requests_mock
+
+                        @pytest.fixture
+                        def m():
+                            with requests_mock.Mocker() as m:
+                                yield m
+
+                        def test_api_client(m):
+                            # Tell the mock to expect a request for www.example.com
+                            # and send a reply of "Hello, world!" back.
+                            m.get('http://www.example.com', content='Hello, world!')
+
+                            # Execute the code under test.
+                            response = my_api_client.query()
+
+                            # Verify that our mock object was called.
+                            assert m.called
+                            assert m.call_count == 1
+
+                            assert response == 'Hello, world!'
+                    </code></pre>
+
+                    <aside class="notes">
+                        Python's built-in unittest module has some mocking functionality,
+                        which I've used.  It's powerful, but a little fiddly and non-intuitive.
+                        pytest also provides its own mocking functionality, called monkeypatch,
+                        which I haven't yet used.  It's great, though, when you can find
+                        already canned libraries like requests_mock.
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>Example: Mocks</h3>
+
+                    <ul>
+                        <li><a href="https://docs.python.org/3/library/unittest.mock.html"></a>unittest.mock</a></li>
+                        <li>pytest's <a href="https://docs.pytest.org/en/latest/monkeypatch.html"></a>monkeypatch</a></li>
+                        <li><a href="https://requests-mock.readthedocs.io/en/latest/">requests-mock</a></li>
+                        <li><a href="https://github.com/spulec/freezegun">FreezeGun</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Even More Features</h3>
+                    <ul>
+                        <li>Test fixtures for managing temporary directories</li>
+                        <li>Capture log output</li>
+                        <li>Intercept Python warnings and deprecations</li>
+                    </ul>
+                </section>
+
+                <section>
                     <h2>Case Study: Automating GUI Tests with pywinauto</h2>
 
                     <aside class="notes">
                         So far, we've been focusing on unit tests.  That's pytest's
                         intended usage, and that ought to be where you spend most of
                         your automated testing efforts.  But pytest is also good for
-                        integration and system tests.  I've been using it to do GUI
-                        test automation of a legacy C++ application that we maintain.
-                        This happens to be a good demonstration of some more unique
-                        pytest features.
+                        integration and system tests.  I've used it to do GUI test
+                        automation of a legacy C++ application.  This happens to be
+                        a good demonstration of some more unique pytest features.
                     </aside>
                 </section>
 
@@ -619,31 +717,6 @@ assert payroll.withheld == 5000
                         notepad.UntitledNotepad.Edit.type_keys('Hello')
                         notepad.UntitledNotepad.Edit.type_keys('^A^C')
                         assert pywinauto.clipboard.GetData() == 'Hello'
-                    </code></pre>
-                </section>
-
-                <section>
-                    <h3>Using pytest with pdb</h3>
-                    <p>Optionally, install PDB++:</p>
-                    <pre><code>pip install pdbpp</code></pre>
-
-                    <p>Manually set a breakpoint:</p>
-                    <pre><code>import pdb; pdb.set_trace()</code></pre>
-
-                    <p>Or break on the first failure:</p>
-                    <pre><code>pytest --pdb -x</code></pre>
-
-                    <aside class="notes">
-                        All of this makes for a very fluid coding style: Write code then play around with it in IPython. Write code then let pytest-watch automatically run it.  Run code then use pdb to manipulate it.  Play around with some code in IPython then save it as new code.
-                    </aside>
-                </section>
-
-                <section>
-                    <h3>Filtering Tests</h3>
-
-                    <pre><code data-trim>
-                    pytest test_notepad.py
-                    pytest test_notepad.py::TestFileIO::test_save
                     </code></pre>
                 </section>
 
@@ -675,6 +748,18 @@ assert payroll.withheld == 5000
 
                         <li><a href="https://www.amazon.com/Clean-Coder-Conduct-Professional-Programmers/dp/0137081073"><img data-src="img/clean-coder.jpg" width=192 height=249><i>The Clean Coder</i>, by Robert C. Martin</a></li>
                     </ul>
+
+                    <aside class="notes">
+                        Automated testing is a big topic, and there's obviously a lot I didn't cover.
+                        But hopefully this is enough to let you see that, even though it's a big topic,
+                        it can actually be pretty easy to get started.  And tools like pytest can make
+                        it really easy to get started.  And they can make it really fun to get started.
+                        It's fun to write a few simple tests and see them running automatically in the
+                        background, and get a quick red message as soon as you make a mistake, and
+                        see it green when you fixed it.  And fun is important, because that helps
+                        provide the incentive to go further - to get into the pros and cons of
+                        different techniques and so on.
+                    </aside>
                 </section>
 
                 <section>
