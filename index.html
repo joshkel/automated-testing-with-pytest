@@ -96,6 +96,31 @@
                     <aside class="notes">
                         <p>This is a pretty artificial example; we're probably not calculating
                         Fibonacci sequences in our day jobs.  But it works for our purposes.</p>
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>Write Some Code</h3>
+
+                    <p>Fibonacci sequence:</p>
+
+                    <table class="number-sequence">
+                        <tr>
+                            <td>0,</td>
+                            <td>1,</td>
+                            <td>1,</td>
+                            <td>2,</td>
+                            <td>3,</td>
+                            <td>5,</td>
+                            <td>8,</td>
+                            <td>13,</td>
+                            <td>21,</td>
+                            <td>34</td>
+                            <td class="ellipse">&hellip;</td>
+                        </tr>
+                    </table>
+                    <img data-src="img/FibonacciSpiral.svg"/>
+                    <aside class="notes">
                         <p>Fibonacci sequences are actually pretty interesting.  Each number is roughly half again as big as the previous.  They show up in nature: branching in trees, arrangement of leaves on a stem, how pineapples and artichokes and pine cones grow, an uncurling fern, and the family trees of honeybees (Wikipedia).  So this isn't just abstract arithmetic.</p>
                     </aside>
                 </section>
@@ -118,7 +143,7 @@ def fib(n):
                 <section>
                     <h3>Test It Out</h3>
 
-                    <pre><code data-trim>
+                    <pre><code class="oxygene" data-trim>
 In [1]: from fib import fib
 
 In [2]: fib(1)
@@ -132,7 +157,13 @@ Out[4]: 3
 
 In [5]: fib(5)
 Out[5]: 5
+                    </code></pre>
+                </section>
 
+                <section>
+                    <h3>Test It Out</h3>
+
+                    <pre><code class="oxygene" data-trim>
 In [6]: assert fib(2) == 1
 
 In [7]: assert fib(5) == 5
@@ -224,7 +255,7 @@ assert payroll.withheld == 5000
                     </dl>
 
                     <aside class="notes">
-                        <p>There are terminology differences here; e.g., Uncle Bob says integration tests are a higher level than component tests.  A few folks will argue that unit tests should aim at units of behavior, not units of code, so higher level than individual classes or methods.  But, if you use these general terms, you'll probably be understood by whoever you're talking with.</p>
+                        <p>There are terminology differences here.  But, if you use these general terms, you'll probably be understood by whoever you're talking with.</p>
                         <p>All of these focus on functional testing &mdash; does the code do what it says it does?  There's also non-functional testing - load testing, security testing, etc. A lot of that can be automated too, but that's outside of the scope of today's talk.</p>
                     </aside>
                 </section>
@@ -533,7 +564,7 @@ assert payroll.withheld == 5000
                         <span style="color:red">E       AssertionError: assert {'city': 'Nas...'state': 'TN'} == {'city': 'Knox...'state': 'TN'}
                         E         Omitting 3 identical items, use -vv to show
                         E         Differing items:
-                        E         {'city': 'Nashville'} != {'city': 'Knoxville'}
+                        E         {'city': 'Nashville'} != {'city': 'Memphis'}
                         E         Use -v to get the full diff</span>
                     </code></pre>
                 </section>
@@ -556,7 +587,10 @@ assert payroll.withheld == 5000
                     <aside class="notes">There's some controversy over how you should use code coverage and whether you should target a particular percentage, but at minimum, it gives valuable information into how effective your test suite is.</aside>
                 </section>
 
-                <section data-background-iframe="cov_html/index.html" data-background-color="white">
+                <section data-background-iframe="cov_html/index.html" data-background-color="white" class="iframe-2">
+                </section>
+
+                <section data-background-iframe="cov_html/events_models_py.html" data-background-color="white" class="iframe-2">
                 </section>
 
                 <section>
@@ -635,8 +669,10 @@ assert payroll.withheld == 5000
 
                 <section>
                     <h3>Example: Mocks</h3>
+                </section>
 
-                    <pre><code data-trim>
+                <section>
+                    <pre><code class="tall-code" data-trim>
                         import my_api_client
                         import pytest
                         import requests_mock
@@ -674,8 +710,8 @@ assert payroll.withheld == 5000
                     <h3>Example: Mocks</h3>
 
                     <ul>
-                        <li><a href="https://docs.python.org/3/library/unittest.mock.html"></a>unittest.mock</a></li>
-                        <li>pytest's <a href="https://docs.pytest.org/en/latest/monkeypatch.html"></a>monkeypatch</a></li>
+                        <li><a href="https://docs.python.org/3/library/unittest.mock.html">unittest.mock</a></li>
+                        <li>pytest's <a href="https://docs.pytest.org/en/latest/monkeypatch.html">monkeypatch</a></li>
                         <li><a href="https://requests-mock.readthedocs.io/en/latest/">requests-mock</a></li>
                         <li><a href="https://github.com/spulec/freezegun">FreezeGun</a></li>
                     </ul>
@@ -750,6 +786,9 @@ assert payroll.withheld == 5000
                     </ul>
 
                     <aside class="notes">
+                        <p>(besides the two mentioned)</p>
+
+                        <p>
                         Automated testing is a big topic, and there's obviously a lot I didn't cover.
                         But hopefully this is enough to let you see that, even though it's a big topic,
                         it can actually be pretty easy to get started.  And tools like pytest can make
@@ -759,11 +798,14 @@ assert payroll.withheld == 5000
                         see it green when you fixed it.  And fun is important, because that helps
                         provide the incentive to go further - to get into the pros and cons of
                         different techniques and so on.
+                        </p>
                     </aside>
                 </section>
 
                 <section>
                     <h4>Image Credits</h4>
+
+                    <p><a href="https://en.wikipedia.org/wiki/Fibonacci_number">&ldquo;Fibonacci Number&rdquo;</a>, Wikipedia</p>
 
                     <p><i>The Dark Knight</i> &copy; Warner Bros. 2017.</p>
 

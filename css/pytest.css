@@ -10,6 +10,15 @@ table.number-sequence > tbody > tr > td.ellipse {
     width: auto;
 }
 
+.reveal.center .slides section code.tall-code {
+    max-height: 600px;
+}
+
+.iframe-2 > iframe {
+    transform: scale(2);
+    transform-origin: 0 0;
+}
+
 .hidden {
     visibility: hidden;
 }
