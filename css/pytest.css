@@ -104,3 +104,9 @@ ul.book-list > li:nth-child(even) > a > img {
     left: calc(100% + 20px);
     transform: translateY(-50%);
 }
+
+@media print {
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}

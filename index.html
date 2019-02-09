@@ -587,10 +587,10 @@ assert payroll.withheld == 5000
                     <aside class="notes">There's some controversy over how you should use code coverage and whether you should target a particular percentage, but at minimum, it gives valuable information into how effective your test suite is.</aside>
                 </section>
 
-                <section data-background-iframe="cov_html/index.html" data-background-color="white" class="iframe-2">
+                <section data-background-iframe="cov_html/index.html" data-background-color="white" class="iframe-2 no-print">
                 </section>
 
-                <section data-background-iframe="cov_html/events_models_py.html" data-background-color="white" class="iframe-2">
+                <section data-background-iframe="cov_html/events_models_py.html" data-background-color="white" class="iframe-2 no-print">
                 </section>
 
                 <section>
@@ -609,11 +609,14 @@ assert payroll.withheld == 5000
 
                 <section>
                     <h3>Using pytest with pdb</h3>
-                    <p>Optionally, install PDB++:</p>
+                    <p>Optionally, install PDB++ or pudb:</p>
                     <pre><code>pip install pdbpp</code></pre>
 
                     <p>Manually set a breakpoint:</p>
-                    <pre><code>import pdb; pdb.set_trace()</code></pre>
+                    <pre><code data-trim>
+                        import pdb; pdb.set_trace()
+                        breakpoint()  # Python 3.7
+                    </code></pre>
 
                     <p>Or break on the first failure:</p>
                     <pre><code>pytest --pdb -x</code></pre>
@@ -836,6 +839,7 @@ assert payroll.withheld == 5000
             // - https://github.com/hakimel/reveal.js#dependencies
             Reveal.initialize({
                 history: true,
+                pdfSeparateFragments: false,
                 dependencies: [
                     { src: 'plugin/markdown/marked.js' },
                     { src: 'plugin/markdown/markdown.js' },
