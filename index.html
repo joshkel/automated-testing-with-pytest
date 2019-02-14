@@ -41,6 +41,10 @@
                             <img class="plain-image" width=275 height=79 src="img/corgibytes-logo.png"/>
                         </div>
                     </div>
+
+                    <aside class="notes">
+                        I am not an expert.  Feedback welcome.
+                    </aside>
                 </section>
 
                 <section>
@@ -175,12 +179,17 @@ In [8]: assert fib(6) == 8
                 <section>
                     <h3>Turn It into Something You Can Run</h3>
 
-                    <pre><code>In [9]: %save test_fib.py 1 6-8</code></pre>
+                    <pre><code class="oxygene">In [9]: %save test_fib.py 1 6-8</code></pre>
 
-                    <pre><code data-trim>
+                    <pre><code class="sh" data-trim>
                     # I can now re-run these tests whenever I want!
                     ./test_fib.py
                     </code></pre>
+
+                    <aside class="notes">
+                        I can use IPython's "%save" magic command and give it the line
+                        numbers from my session.
+                    </aside>
                 </section>
 
                 <section>
@@ -376,6 +385,10 @@ assert payroll.withheld == 5000
                         <li>Test fixtures</li>
                         <li>And lots of &ldquo;quality of life&rdquo; improvements</li>
                     </ul>
+
+                    <aside class="notes">
+                        And we'll go over these in more detail as we go.
+                    </aside>
                 </section>
 
                 <section>
@@ -490,7 +503,7 @@ assert payroll.withheld == 5000
 
                     <p>pytest inspects the Abstract Syntax Tree (AST) to turn this&hellip;</p>
 
-                    <pre><code data-trim>
+                    <pre><code class="python" data-trim>
                     a = 1
                     b = 2
                     assert a + b == 3
@@ -528,7 +541,7 @@ assert payroll.withheld == 5000
                 <section>
                     <h3>Pytest Assertions</h3>
 
-                    <pre><code data-trim>
+                    <pre><code class="python" data-trim>
                         a = 1
                         b = 2
                         assert a + b == 4
@@ -547,7 +560,7 @@ assert payroll.withheld == 5000
                 <section>
                     <h3>Pytest Assertions</h3>
 
-                    <pre><code data-trim>
+                    <pre><code class="python" data-trim>
                         actual   = {'first_name': 'John', 'last_name': 'Doe',
                                     'city': 'Nashville', 'state': 'TN'}
 
@@ -583,14 +596,16 @@ assert payroll.withheld == 5000
                     pip install pytest-cov
                     pytest --cov=. --cov-report=html:../cov_html
                     </code></pre>
-
-                    <aside class="notes">There's some controversy over how you should use code coverage and whether you should target a particular percentage, but at minimum, it gives valuable information into how effective your test suite is.</aside>
                 </section>
 
                 <section data-background-iframe="cov_html/index.html" data-background-color="white" class="iframe-2 no-print">
                 </section>
 
-                <section data-background-iframe="cov_html/events_models_py.html" data-background-color="white" class="iframe-2 no-print">
+                <section data-background-iframe="cov_html/events_models_py.html#n53" data-background-color="white" class="iframe-2 no-print">
+                </section>
+
+                <section data-background-iframe="cov_html/events_models_py.html#n88" data-background-color="white" class="iframe-2 no-print">
+                    <aside class="notes">There's some controversy over how you should use code coverage and whether you should target a particular percentage, but at minimum, it gives valuable information into how effective your test suite is.</aside>
                 </section>
 
                 <section>
@@ -613,9 +628,9 @@ assert payroll.withheld == 5000
                     <pre><code>pip install pdbpp</code></pre>
 
                     <p>Manually set a breakpoint:</p>
-                    <pre><code data-trim>
+                    <pre><code class="python" data-trim>
                         import pdb; pdb.set_trace()
-                        breakpoint()  # Python 3.7
+                        breakpoint()  # Python 3.7 only
                     </code></pre>
 
                     <p>Or break on the first failure:</p>
@@ -699,14 +714,6 @@ assert payroll.withheld == 5000
 
                             assert response == 'Hello, world!'
                     </code></pre>
-
-                    <aside class="notes">
-                        Python's built-in unittest module has some mocking functionality,
-                        which I've used.  It's powerful, but a little fiddly and non-intuitive.
-                        pytest also provides its own mocking functionality, called monkeypatch,
-                        which I haven't yet used.  It's great, though, when you can find
-                        already canned libraries like requests_mock.
-                    </aside>
                 </section>
 
                 <section>
@@ -718,6 +725,14 @@ assert payroll.withheld == 5000
                         <li><a href="https://requests-mock.readthedocs.io/en/latest/">requests-mock</a></li>
                         <li><a href="https://github.com/spulec/freezegun">FreezeGun</a></li>
                     </ul>
+
+                    <aside class="notes">
+                        Python's built-in unittest module has some mocking functionality,
+                        which I've used.  It's powerful, but a little fiddly and non-intuitive.
+                        pytest also provides its own mocking functionality, called monkeypatch,
+                        which I haven't yet used.  It's great, though, when you can find
+                        already canned libraries like requests_mock.
+                    </aside>
                 </section>
 
                 <section>
@@ -727,6 +742,14 @@ assert payroll.withheld == 5000
                         <li>Capture log output</li>
                         <li>Intercept Python warnings and deprecations</li>
                     </ul>
+
+                    <aside class="notes">
+                        I'm summarizing here; this is covered by the pytest docs, and
+                        I don't want to be overwhelming.  Really, though, pytest has
+                        already thought of most of what I come across as I'm trying to
+                        test my code, and as I've found new needs, it's worth checking
+                        to see how they're handled.
+                    </aside>
                 </section>
 
                 <section>
@@ -779,6 +802,16 @@ assert payroll.withheld == 5000
                     <h3>Further Reading</h3>
 
                     <ul class="book-list">
+                        <li><a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"><img data-src="img/clean-code.jpg" class="float-right" width=188 height=249><i>Clean Code</i>, by Robert C. Martin</a></li>
+
+                        <li><a href="https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052"><img data-src="img/working-effectively-with-legacy-code.jpg" class="float-right" width=188 height=249><i>Working Effectively With Legacy Code</i>, Michael Feathers</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Further Reading</h3>
+
+                    <ul class="book-list">
                         <li><a href="https://www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530"><img data-src="img/test-driven-development-by-example.jpg" width=198 height=249><i>Test Driven Development: By Example</i>, Kent Beck</a></li>
 
                         <li><a href="https://www.amazon.com/xUnit-Test-Patterns-Refactoring-Code/dp/0131495054"><img data-src="img/xunit-test-patterns.jpg" width=174 height=249><i>xUnit Test Patterns</i>, by Gerard Meszaros</a></li>
@@ -789,11 +822,9 @@ assert payroll.withheld == 5000
                     </ul>
 
                     <aside class="notes">
-                        <p>(besides the two mentioned)</p>
-
-                        <p>
                         Automated testing is a big topic, and there's obviously a lot I didn't cover.
-                        But hopefully this is enough to let you see that, even though it's a big topic,
+                        And a lot of strong opinions on it, and folks who almost act like you should
+                        feel guilty if you don't do it right.  But I've hopefully shown that
                         it can actually be pretty easy to get started.  And tools like pytest can make
                         it really easy to get started.  And they can make it really fun to get started.
                         It's fun to write a few simple tests and see them running automatically in the
@@ -801,14 +832,13 @@ assert payroll.withheld == 5000
                         see it green when you fixed it.  And fun is important, because that helps
                         provide the incentive to go further - to get into the pros and cons of
                         different techniques and so on.
-                        </p>
                     </aside>
                 </section>
 
                 <section>
                     <h4>Image Credits</h4>
 
-                    <p><a href="https://en.wikipedia.org/wiki/Fibonacci_number">&ldquo;Fibonacci Number&rdquo;</a>, Wikipedia</p>
+                    <p><a href="https://en.wikipedia.org/wiki/Fibonacci_number">&ldquo;Fibonacci Number,&rdquo;</a> Wikipedia</p>
 
                     <p><i>The Dark Knight</i> &copy; Warner Bros. 2017.</p>
 
